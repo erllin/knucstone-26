@@ -1,0 +1,177 @@
+/* 학기별 수업이력 컨텐츠 */
+.cls-history {
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+  margin-bottom: 20px;
+  min-height: 240px;
+  box-sizing: border-box;
+
+  justify-content: left;
+  align-items: center;
+}
+
+.ct-sem {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 20px;
+}
+
+.sem-header {
+  display: flex;
+  flex-direction: row;
+
+  padding: 4px 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sem-title {
+  font-size: 1rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.sem-btn {
+  display: flex;
+  flex-direction: row;
+}
+
+.sem-btn > div {
+  font-size: 1.5rem;
+}
+
+.sem-container {
+  display: flex;
+  flex-direction: column;
+
+  padding: 4px 14px;
+  
+}
+
+.sem-item {
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(0, 0, 0, 0.3);
+
+  padding: 4px 14px;
+  margin: 2px 0;
+  
+  border-radius: 10px;
+}
+
+/* 학기 요약 관련 */
+.semit-summary {
+  display: flex;
+  flex-direction: row;
+
+  padding: 0px 4px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.semit-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.semit-title {
+  font-size: 1rem;
+  font-weight: 700;
+
+  padding: 4px 7px;
+}
+
+.semit-sum > span {
+    margin: 0 10px;
+}
+
+.semit-expanded-content {
+    display: flex;
+    flex-direction: column;
+
+    background: var(--con-theme);
+    margin: 12px 14px;
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.semit-exp-header {
+    display: flex;
+    flex-direction: row;
+
+    background: var(--con-theme);
+
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 12px 20px;
+
+    justify-content: space-between;
+}
+
+.semit-edit-btn {
+    cursor: pointer;
+}
+
+/* 과목 테이블 */
+.course-table {
+    table-layout: fixed;
+    border-collapse: collapse; 
+    width: 100%;
+
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.course-table th {
+    color: var(--text-soft);
+    font-weight: bold;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--con-theme); /* 헤더 강조 선 */
+}
+
+/* 셀(td) 스타일 */
+.course-table td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--con-theme); /* 행 구분선 */
+    color: var(--text-soft);
+}
+
+.course-table tbody tr:hover {
+    background-color: #f1f3f5;
+    transition: background-color 0.2s ease;
+}
+
+.course-table tr:last-child>td {
+    border-bottom: none;
+}
+
+/* 마우스 올렸을 때 행 강조 (선택 사항) */
+.course-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease;
+}
+
+
+/* 등록된 과목이 없을 때. */
+.no-course-message {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 12px 14px;
+
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.ncm-i {
+    padding: 10px 14px;
+}
+
+.no-course-message > p {
+    padding: 10px 14px;
+}

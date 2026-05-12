@@ -1,0 +1,69 @@
+/* 컨테이너 공통 설정 [ ct-... ] */
+.ct-default {
+  display: flex;
+  position: relative;
+
+  border-radius: 30px;
+  margin: 10px 0;
+}
+
+.ct-wide {
+  width: 70%;
+  min-width: 450px;
+}
+
+.ct-childfull {
+  width: 100%;
+}
+
+.ct-hv {
+  background-color: #333333;
+}
+
+/* 아이콘 관련 설정 [ i-... ] */
+.i-tiny {
+  font-size: 24px;
+}
+
+.i-normal {
+  font-size: 32px;
+}
+
+.i-largo {
+  font-size: 48px;
+}
+
+.i-rot {
+  transition: transform 0.3s ease;
+}
+
+.i-abs {
+  position: absolute;
+  z-index: 10;
+}
+
+.i-rtop {
+  top: 20px;
+  right: 20px;
+}
+
+.i-rcen {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+}
+
+.i-hv {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.ct-hv:hover .i-hv {
+  opacity: 1;
+}
+
+/* 회전 설정 [ rot-... ] */
+.rot-180 {
+  transform: rotate(180deg);
+}

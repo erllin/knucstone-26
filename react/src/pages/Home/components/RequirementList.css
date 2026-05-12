@@ -1,0 +1,112 @@
+.reqm-container {
+  width: 100%;
+  margin: 10px auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.reqm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.reqm-tags {
+  display: flex;
+  flex-direction: row; /* 가로 방향 배치 */
+  gap: 10px;           /* 태그 사이 간격 */
+  flex: 1;             /* 버튼을 제외한 남은 공간 전체 차지 */
+  width: 100%;
+}
+
+/* 축약 모드 태그 스타일 */
+.reqm-tag {
+  flex: 1;             /* ★ 핵심: 남은 공간을 균등하게 나눠 가짐 (유동적 너비) */
+  min-width: 0;        /* 내용이 길어져도 박스가 터지지 않게 방지 */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 텍스트와 아이콘 중앙 정렬 */
+  gap: 8px;
+  
+  padding: 12px 10px;  /* 상하 패딩을 늘려 크기를 키움 */
+  border-radius: 12px;
+  font-size: 0.95rem;  /* 글자 크기 약간 키움 */
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.reqm-tag.done { color: #74b9ff; border: 1px solid #74b9ff55; }
+.reqm-tag.pending { color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); }
+
+/* 확장 리스트 스타일 */
+.reqm-expanded-list {
+  margin-top: 25px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.reqm-list-item {
+  padding: 15px 5px;
+}
+
+.reqm-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reqm-item-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.reqm-item-detail {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.reqm-divider {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 10px 0;
+}
+
+/* iOS 스타일 토글 스위치 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px; width: 16px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider { background-color: #74b9ff; }
+input:checked + .slider:before { transform: translateX(22px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }

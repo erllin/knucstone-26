@@ -1,0 +1,39 @@
+.bn-wrapper {    
+    display: flex;
+    position: fixed;
+    bottom: 0;
+
+    left: 50%;
+    transform: translateX(-50%); 
+
+    width: 100%;
+    max-width: 1126px;
+    
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 10px 10px 0 0;
+    
+    z-index: 100;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.bn-wrapper > div {
+    display: flex;
+    flex: 1;
+
+    height: auto;
+    font-size: 32px;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.bn-wrapper {
+  height: 45px;
+}
+
+.active { color: black; }
+.inactive { color: gray; }

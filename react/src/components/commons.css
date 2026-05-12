@@ -1,0 +1,35 @@
+.page {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 80vh;
+
+    align-items: center;
+    overflow: auto;
+}
+
+.container {
+    display: flex;
+    position: relative;
+
+    width: 70%;
+    min-width: 450px;
+    height: 50%;
+    min-height: 300px;
+}
+
+/* 디버그: 색상 입히기 */
+.debug-r {
+    background-color: rosybrown;
+    color: black;
+}
+
+.debug-g {
+    background-color: seagreen;
+    color: aliceblue;
+}
+
+.debug-b {
+    background-color: royalblue;
+    color: azure;
+}

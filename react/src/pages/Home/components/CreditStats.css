@@ -1,0 +1,88 @@
+/* 이수학점 */
+.credit {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 220px;
+  gap: 0; 
+  margin: 10px auto;
+  padding: 30px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.credit-item {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+/* !google.ai 제안, 사이 세로선 */
+.credit-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.cr-title {
+  font-size: 1rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.cr-current {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.cr-values {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.cr-slash, .cr-total {
+  font-size: 1.2rem;
+  opacity: 0.6;
+  margin-left: 4px;
+}
+
+/* !프로그레스 바 모두 << google.ai가 제안함. */
+.cr-progress-bg {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.cr-progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 하단 퍼센트 표시 */
+.cr-percent {
+  font-size: 0.9rem;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+/* 색상 테마 (선명도 조정) */
+.bg-main { background-color: #f1c40f; } /* Vivid Yellow */
+.bg-major { background-color: #3498db; } /* Bright Blue */
+.bg-lib { background-color: #fab1a0; } /* Carrot Orange */
+.bg-free { background-color: #fab1a0; } /* Emerald Green */

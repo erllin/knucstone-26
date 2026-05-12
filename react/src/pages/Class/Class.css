@@ -1,0 +1,14 @@
+/* overflow 덮어쓰기 위함. */
+.padb-40 {
+  padding-bottom: 40px;
+  overflow: auto;
+}
+
+.cls-sum {
+  display: flex;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 240px;
+}

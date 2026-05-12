@@ -1,0 +1,209 @@
+/* 팝업 베이스 */
+.cp-container {
+  background-color: var(--con-theme);
+  color: var(--text-soft);
+  padding: 28px;
+  width: 620px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* 헤더 섹션 */
+.cp-header h3 {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: var(--text-soft)
+}
+
+.warning-text {
+  color: var(--warning);
+  font-size: 0.85rem;
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+.taken-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  margin-top: 8px;
+  background-color: var(--main-theme);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 입력 요소 그룹 (연도, 학기, 버튼을 묶음) */
+.selector-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-year {
+  width: 80px !important;
+  text-align: center;
+}
+
+.select-term {
+  width: 100px !important;
+}
+
+.active-badge {
+  margin-left: auto;
+  padding: 6px 12px;
+  background-color: var(--con-theme);
+  border-radius: 8px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.modal-container {
+  /* ... 기존 설정 ... */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* 입력 요소 공통 */
+.dark-input, .dark-select {
+  background-color: var(--sub-theme);
+  color: #fff;
+  border: 1px solid var(--main-theme);
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.dark-select {
+  cursor: pointer;
+}
+
+.apply-btn {
+  padding: 8px 14px;
+  background-color: var(--btn-acc);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.apply-btn:hover {
+  background-color: var(--btn-acc-hv);
+}
+
+.active-badge {
+  margin-left: auto;
+  padding: 4px 10px;
+  background-color: var(--con-theme);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* 과목 리스트 테이블 */
+.table-header {
+  display: flex;
+  gap: 8px;
+  padding: 0 10px 8px 10px;
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-top: 20px;
+}
+
+.course-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.add-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed var(--text-soft);
+  color: var(--text-soft);
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.add-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 하단 버튼 */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.cancel-btn {
+  background: transparent;
+  color: var(--text-soft);
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.del-btn {
+  background-color: var(--danger);
+  color: var(--text-pure);
+  border: none;
+  border-radius: 8px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.table-header {
+  display: flex;
+  gap: 10px;
+  padding: 0 10px 8px 10px;
+  font-size: 0.85rem;
+  color: var(--text-pure);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 20px;
+  text-align: center;
+}
+
+.course-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+/* 폼 비율 설정 */
+.col-cid { flex: 1; }
+.col-name { flex: 2.5; }
+.col-credit { flex: 1; }
+.col-grade { flex: 1; }
+.col-del { width: 40px; flex-shrink: 0; }
+
+.dark-input, .dark-select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

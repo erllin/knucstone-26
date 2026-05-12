@@ -1,0 +1,229 @@
+/* !평점 << 이수학점 기준으로 디자인 작성해달라고 처리. */
+.gpa {
+  display: flex;
+  flex-direction: column;
+  
+  width: 100%;
+  min-height: 200px;
+  margin: 10px auto;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.gpa-summary {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  min-height: 150px;
+  margin: 10px auto;
+  
+  justify-content: space-around;
+  align-items: center;
+}
+
+.gpa-item {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  align-items: center;
+}
+
+.gpa-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.gpa-title {
+  font-size: 1rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.gpa-values {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.gpa-score {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.gpa-total-score {
+  font-size: 1.1rem;
+  opacity: 0.6;
+  margin-left: 6px;
+}
+
+.gpa-progress-bg {
+  width: 80%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gpa-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease-out;
+}
+
+.gpa-expanded-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.gpa-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 텍스트와 아이콘 사이 간격 */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.gpa-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.caret-icon {
+  transition: transform 0.3s ease;
+}
+
+.caret-icon.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* 리스트 스타일 */
+.semester-table-wrapper {
+  width: 100%;
+  padding: 0 30px 30px 30px; /* 요약 영역과 여백 통일 */
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 예외 처리부분 (성적 데이터 존재하지 않을 때) */
+.no-data-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  color: rgba(255, 255, 255, 0.4);
+  gap: 15px;
+}
+
+.no-data-message p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.expanded-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 30px 40px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.chart-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.chart-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+/* Recharts 범례(Legend) 텍스트 색상 */
+.recharts-legend-item-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+}
+
+.semester-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden; /* 둥근 테두리 적용 */
+  font-size: 0.95rem;
+}
+
+.semester-table th, 
+.semester-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.semester-table th {
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.semester-table tr:last-child td {
+  border-bottom: none;
+}
+
+.term-name {
+  font-weight: 600;
+  color: #fff;
+  text-align: left;
+  padding-left: 25px;
+}
+
+.score-cell {
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-weight: 500;
+}
+
+/* 페이드인 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 버튼 간격 조정 */
+.gpa-btn-container {
+  padding: 20px 0;
+}
+
+/* 색상 테마 - 평점만의 색상 부여 */
+.bg-total { background-color: #f1c40f; } /* 연보라 */
+.bg-major { background-color: #74b9ff; } /* 연파랑 */
+.bg-else { background-color: #fab1a0; } /* 연주황 */

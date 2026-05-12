@@ -1,0 +1,215 @@
+/* !google.ai 트리 구조 변형하면서, 상당수의 속성이 새로 수정/정렬됨. 주의요망. */
+/* Class.css 주요 표지
+    .page: 현재 페이지(class) 속성. 
+      추후 겹치면 문제 발생할 수 있으므로, 이름을 바꾸거나 일로 통일하는 것이 좋을 것 같다.
+    .header: 헤더부분
+      .header-... : 헤더 휘하 속성.
+      .profile, .prof-... : 프로필 관련 속성.
+    .ct: 메인부분 (이름 겹쳐 충돌나서 임시 이름으로 둠.)
+      .credit: 이수학점 관련 속성.
+      .requirement: 졸업요건 관련 속성.
+      .gpa: 학점 평점 관련 속성.
+    .modal: 모달(팝업) 부분, 지금은 프로필 수정하는 팝업만 다룸.
+      .modal-...: 각종 모달 레이아웃 속성.
+*/
+
+
+
+/* 페이지 */
+.page {
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+  width: 100%;
+  max-width: 1128px;
+  margin: 0 auto;
+
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* 헤더 부분 */
+.header {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 20px 0;
+
+  align-items: center;
+}
+
+.header-top {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.header-top .ct-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 0 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.profile {  
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  width: 70%;
+  min-height: 150px;
+  margin: 20px auto;
+  padding: 20px;
+
+  box-sizing: border-box;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+/* 프로필 수정 버튼 */
+.edit-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  /* !BottomNav와 동일한 인덱스, 조심할 것. (위치가 달라서 대부분은 괜찮겠지만...)*/
+  z-index: 100; 
+  padding: 8px;
+  line-height: 1;
+  
+  background: none;
+  border: none;
+  color: var(--text-pure);
+  cursor: pointer;
+  font-size: 1.4rem;
+  
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 프로필 수정 버튼 호버링 */
+.profile:hover .edit-btn {
+  opacity: 0.8;
+}
+
+.edit-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.prof-univ {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* !학과명, 폰트 크기 키웠더니, 버튼이 안 눌렸었음. 문제가 있다면, 확인해볼 것.*/
+.prof-depart {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* 입학년도 + 전공유형 */
+.prof-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* 가로 구분선 */
+  justify-content: space-between; /* 양 끝단에 요소 정렬 */
+}
+
+.adm-year, .major-type {
+  font-size: 0.9rem;
+}
+
+/* 메인 부분 */
+.ct {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+
+  padding-top: 40px;
+  padding-bottom: 40px;
+  overflow-y: auto; /* 원래 overflow: scroll 이었음. */
+}
+
+/* !크롬 전용으로, 스크롤바를 보이지 않게 함. 다른 브라우저 쓰는 경우, 다른 속성 추가해야 할 수도 있음. */
+.ct::-webkit-scrollbar {
+  display: none;
+}
+
+.ct-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+/* !유틸리티(임시) */
+.border-r {
+  border-radius: 20px;
+}
+
+.main-theme {
+  background-color: var(--main-theme); /* Deep Charcoal */
+  color: var(--text-white);
+}
+
+.sub-theme {
+  background: linear-gradient(to bottom, var(--sub-theme), var(--main-theme)); /* 그라데이션 Charcoal */
+  color: var(--text-pure);
+}
+
+.con-theme {
+  background-color: var(--con-theme); /* Light Charcoal */
+  color: var(--text-soft);
+}
+
+
+/* !이하는 Home 하위의 컴포넌트에 대한 CSS 정의. (또는 더미) */
+/* 공통 섹션 스타일, 통일감 */
+.credit, .requirement, .gpa, .navblk {
+  display: flex;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 이수학점 & GPA, 통일감 */
+.credit, .gpa {
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.credit {
+  min-height: 240px;
+}
+
+.gpa {
+  min-height: 170px;
+}
+
+/* 졸업요건 */
+.requirement {
+  min-height: 50px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
