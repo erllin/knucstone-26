@@ -144,7 +144,8 @@ const CoursePopup = ({ targetSem, onClose }) => {
     // const handleUpdateRow: 개별 수강이력 업데이트 처리자 (cid 자동 검색 포함)
     const handleUpdateRow = useCallback(async (index, field, value) => {
         // 락
-        if (isUpdating.current) { return; }        
+        if (isUpdating.current) { return; }
+        isUpdating.current = true;       
         // 동기 처리 (async 계열을 사용하지 않는 요소들)
         if (field !== "cid") {
             setLocalCourses(prev => {
