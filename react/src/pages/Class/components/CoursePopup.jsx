@@ -145,6 +145,7 @@ const CoursePopup = ({ targetSem, onClose }) => {
     const handleUpdateRow = useCallback(async (index, field, value) => {
         // 락
         if (isUpdating.current) { return; }
+        // 락 활성화
         isUpdating.current = true;       
         // 동기 처리 (async 계열을 사용하지 않는 요소들)
         if (field !== "cid") {
@@ -153,6 +154,8 @@ const CoursePopup = ({ targetSem, onClose }) => {
                 next[index] = { ...next[index], [field]: value };
                 return next;
             });
+            // 예외 상황에서의 락 해제 (동기에서 멈추는 경우.)
+            isUpdating.current = false;
             return;
         }
         // !cid 변경하는 경우 초기화 수행. (비동기 검색 준비)

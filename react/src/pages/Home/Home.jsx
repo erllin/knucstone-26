@@ -68,7 +68,7 @@ const Home = () => {
             <nav className="menu">
               <div className="logout-btn"
                 onClick={handleLogout}
-                stype={{ cursor: 'pointer'}}
+                type={{ cursor: 'pointer'}}
               >
                 로그아웃</div>
               <div className="opt-btn">설정</div>
