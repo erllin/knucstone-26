@@ -1,12 +1,15 @@
-/* 팝업 베이스 */
 .cp-container {
   background-color: var(--con-theme);
-  color: var(--text-soft);
-  padding: 28px;
+  color: var(--text-bright);  
+  padding: 24px;               
   width: 620px;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  
+
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
 }
 
 /* 헤더 섹션 */
@@ -14,7 +17,7 @@
   margin: 0 auto;
   margin-bottom: 20px;
   font-size: 1.4rem;
-  color: var(--text-soft)
+  color: var(--text-bright);
 }
 
 .warning-text {
@@ -31,18 +34,25 @@
   padding: 14px;
   border-radius: 14px;
   margin-top: 8px;
-  background-color: var(--main-theme);
+  
+  background-color: var(--inner-bg);
+  border: 1px solid var(--border-color);
   width: 100%;
   box-sizing: border-box;
 }
 
-/* 입력 요소 그룹 (연도, 학기, 버튼을 묶음) */
+.taken-selector span {
+  color: var(--text-bright);
+}
+
+/* 입력 요소 그룹 */
 .selector-group {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+/* 연도/학기 특수 너비 제어 */
 .input-year {
   width: 80px !important;
   text-align: center;
@@ -52,37 +62,55 @@
   width: 100px !important;
 }
 
+/* 활성화 배지 */
 .active-badge {
   margin-left: auto;
   padding: 6px 12px;
-  background-color: var(--con-theme);
+  background-color: var(--card-bg);
   border-radius: 8px;
-  color: var(--accent);
+  color: var(--text-bright);
   font-size: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   white-space: nowrap;
 }
 
-.modal-container {
-  /* ... 기존 설정 ... */
+.modal-body {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-
-/* 입력 요소 공통 */
 .dark-input, .dark-select {
-  background-color: var(--sub-theme);
-  color: #fff;
-  border: 1px solid var(--main-theme);
-  padding: 8px;
+  background-color: var(--inner-bg);
+  color: var(--text-bright);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
   border-radius: 8px;
   outline: none;
+  font-family: inherit;
+}
+
+.dark-input::placeholder {
+  color: var(--text-bright);
+  opacity: 0.6;
 }
 
 .dark-select {
   cursor: pointer;
+}
+
+/* 🌟 select 클릭 시 출력되는 옵션 리스트 배경색 방어 코드 */
+.dark-select option {
+  background-color: var(--inner-bg);
+  color: var(--text-bright);
+}
+
+/* 🌟 읽기 전용 상태일 때 시각적으로 구분이 가도록 다크 톤앤매너 유지보정 */
+.dark-input[readOnly] {
+  background-color: rgba(0, 0, 0, 0.15);
+  color: var(--text-bright);
+  border-color: rgba(255, 255, 255, 0.05);
+  cursor: not-allowed;
 }
 
 .apply-btn {
@@ -100,66 +128,84 @@
   background-color: var(--btn-acc-hv);
 }
 
-.active-badge {
-  margin-left: auto;
-  padding: 4px 10px;
-  background-color: var(--con-theme);
-  border-radius: 6px;
-  color: var(--accent);
-  font-size: 0.9rem;
-}
-
-/* 과목 리스트 테이블 */
+/* 과목 리스트 테이블 헤더 */
 .table-header {
   display: flex;
-  gap: 8px;
-  padding: 0 10px 8px 10px;
+  gap: 10px;
+  padding: 0 0px 8px 0px;
   font-size: 0.85rem;
-  color: #ccc;
-  margin-top: 20px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+  margin-top: 12px;
+  text-align: center;
+  box-sizing: border-box; /* 너비 계산 꼬임 방지 */
 }
-
+/* 개별 과목 엔티티 행 구조 */
 .course-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: 10px;
+  margin-bottom: 6px;
   align-items: center;
 }
 
+/* 과목 추가 버튼 */
 .add-btn {
   width: 100%;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px dashed var(--text-soft);
-  color: var(--text-soft);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--border-color);
+  color: var(--text-muted);
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 6px;
   border-radius: 10px;
-  transition: background 0.2s;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
 }
 
 .add-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-bright);
 }
 
-/* 하단 버튼 */
+/* 하단 버튼 영역 */
 .modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
   margin-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-color);
   padding-top: 20px;
+}
+
+.save-btn {
+  background-color: var(--btn-acc);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.save-btn:hover {
+  background-color: var(--btn-acc-hv);
 }
 
 .cancel-btn {
   background: transparent;
-  color: var(--text-soft);
+  color: var(--text-muted);
   border: none;
   cursor: pointer;
   text-decoration: underline;
+  font-weight: 500;
 }
 
+.cancel-btn:hover {
+  color: var(--text-bright);
+}
+
+/* 행 삭제 버튼 */
 .del-btn {
   background-color: var(--danger);
   color: var(--text-pure);
@@ -169,39 +215,34 @@
   height: 35px;
   cursor: pointer;
   font-size: 1.2rem;
-}
-
-.table-header {
   display: flex;
-  gap: 10px;
-  padding: 0 10px 8px 10px;
-  font-size: 0.85rem;
-  color: var(--text-pure);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 20px;
-  text-align: center;
-}
-
-.course-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
   align-items: center;
+  justify-content: center;
+  transition: filter 0.2s;
 }
 
-/* 폼 비율 설정 */
-.col-cid { flex: 1; }
-.col-name { flex: 2.5; }
-.col-credit { flex: 1; }
-.col-grade { flex: 1; }
+.del-btn:hover {
+  filter: brightness(0.9);
+}
+
+/* 폼 열 너비 비율 설정 (원본 스펙 유지) */
+.col-cid { flex: 1.1; }
+.col-name { flex: 2.8; }
+.col-ctype { flex: 1.1; }
+.col-credit { flex: 0.7; }
+.col-grade { flex: 0.9; }
 .col-del { width: 40px; flex-shrink: 0; }
+
+.col-ctype .dark-select {
+  padding: 8px 6px;
+}
 
 .dark-input, .dark-select {
   width: 100%;
   box-sizing: border-box;
 }
 
-
+/* 스핀 버튼 제거 (원본 유지) */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

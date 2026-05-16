@@ -32,6 +32,7 @@
   background-color: var(--con-theme);
   color: #F0F0F0;
 
+  border: 1px solid var(--border-color);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
@@ -72,10 +73,10 @@
 }
 
 .modal-form input, .modal-form select {
-  background-color: var(--sub-theme);
+  background-color: var(--inner-bg);
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid var(--main-theme);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-family: inherit;
 }

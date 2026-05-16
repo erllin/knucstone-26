@@ -48,11 +48,10 @@ const Class = () => {
                 <div className="header-top">
                     <div className="ct-wrapper">
                         {/* 헤더>로고 */}
-                        <div className="logo">수강이력</div>
+                        <div className="logo">MYCURRI</div>
                         {/* 헤더>메뉴:  추후 logo 위치 우측면으로 밀 예정. */}
                         <nav className="menu">
-                            <div className="edit-profile">나이트모드</div>
-                            <div className="night-mode">설정</div>
+                            수강이력
                         </nav>
                     </div>
                 </div>

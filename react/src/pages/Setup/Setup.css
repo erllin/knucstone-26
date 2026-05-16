@@ -1,0 +1,118 @@
+.page {
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+  width: 100%;
+  max-width: 1128px;
+  margin: 0 auto;
+
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+
+.setup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #2b343a;   /* 대시보드 배경보다 살짝 더 어두운 기본 배경 (필요시 변경) */
+}
+
+/* 입력 폼 컨테이너 너비 제한 및 고정 */
+.setup-container.framework {
+  width: 100%;
+  max-width: 440px;            /* 일반적인 로그인/설정 폼 보편적 크기 */
+  margin-bottom: 0;            /* 중앙 정렬을 위해 하단 마진 제거 */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* 차분한 그림자 효과 */
+}
+
+/* 내부 레이아웃 정렬 모듈 */
+.login-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.form-step {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-header {
+  margin-bottom: 4px;
+}
+
+/* 공통 텍스트 스타일 */
+.setup-muted-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 4px 0 0 0;
+}
+
+/* 입력창 및 컴포넌트 스타일 */
+.setup-input {
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  color: var(--text-bright);
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.setup-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* 버튼 스타일 및 인터랙션 */
+.setup-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--card-bg);
+  color: var(--text-bright);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.setup-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px); /* 미세한 팝업 효과 */
+}
+
+.setup-btn:active {
+  transform: translateY(0);
+}
+
+.setup-btn.primary {
+  margin-top: 8px;
+  background: var(--inner-bg);
+  border: 1px solid var(--text-bright);
+}
+
+.setup-row {
+  display: flex;
+  gap: 16px;          /* 요소 사이의 간격을 기존 간격과 통일 */
+  width: 100%;
+}
+
+/* 행 내부의 개별 select 박스 컨테이너가 1:1 비율로 늘어나도록 설정 */
+.setup-row .fr-title-select {
+  flex: 1;
+  min-width: 0;       /* flex 안에서 너비가 비정상적으로 커지는 현상 방지 */
+}

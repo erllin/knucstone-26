@@ -66,7 +66,7 @@ const SemesterEntity = ({ sem, onOpenModal }) => {
             {isOpen && (
                 <div className="semit-expanded-content">
                     <div className="semit-exp-header">
-                        <span>과목 리스트</span>                        
+                        <span>{sem.taken}</span>                        
                         <div className="semit-edit-btn" 
                             onClick={(e) => {
                                 e.stopPropagation(); 

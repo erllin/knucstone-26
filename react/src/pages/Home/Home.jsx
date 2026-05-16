@@ -11,6 +11,7 @@ import ProfilePopup from "./components/ProfilePopup";
 import CreditStats from "./components/CreditStats";
 import GpaStats from "./components/GpaStats";
 import RequirementList from "./components/RequirementList";
+import FrameworkViewer from "./components/FrameworkViewer";
 // 전공 유형 상수값.
 const MAJOR_TYPES = ["미상", "단일전공", "단일부전공", "복합부전공", "복수전공"];
 
@@ -71,7 +72,6 @@ const Home = () => {
                 type={{ cursor: 'pointer'}}
               >
                 로그아웃</div>
-              <div className="opt-btn">설정</div>
             </nav>
           </div>
         </div>
@@ -103,10 +103,7 @@ const Home = () => {
           {/* 메인>졸업요건: 이수학점 외 요건들의 상태 모아둘 곳, 버튼 두어서 아래로 확장할 수 있게 할 예정. (=요약/상세히) */}
           <RequirementList />
 
-          <section>
-            {/* 추천 과목 섹터 */}
-          </section>
-
+          <FrameworkViewer />
         </div>
       </main>
 

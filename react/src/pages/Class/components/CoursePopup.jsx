@@ -3,13 +3,10 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useUser } from "../../../components/UserProvider";
 // firebase
 import { db } from "../../../firebase";
-import { writeBatch, doc, collection, query, where, getDocs, getDoc } from "firebase/firestore";
+import { writeBatch, doc, collection } from "firebase/firestore";
 // css
 import "../Class.css"
 import "./CoursePopup.css"
-
-// 전역 값
-const courseCache = {};
 
 const grades = ["A+", "A0", "B+", "B0", "C+", "C0", "D+", "D0", "F", "P", "NP"];
 const ctypes = ["전필", "전선", "교양", "자선"];
@@ -60,6 +57,13 @@ const CourseEntity = React.memo(({ course, index, onUpdate, onDelete, grades }) 
                     placeholder="강의명" 
                 />
             </div>
+            <div className="col-ctype">
+                <input className="dark-input"
+                    value={course.ctype} readOnly={course.fromDB}
+                    onChange={(e) => onUpdate(index, "cname", e.target.value)}
+                    placeholder="유형"
+                />
+            </div>
             <div className="col-credit">
                 <input type="number" className="dark-input" style={{ textAlign: 'center' }}
                     value={course.credit} readOnly={course.fromDB}
@@ -86,60 +90,22 @@ const CourseEntity = React.memo(({ course, index, onUpdate, onDelete, grades }) 
     @targetSem: 선택된 학기
 */
 const CoursePopup = ({ targetSem, onClose }) => {
-    const { user, userCourse, userSemester } = useUser();
+    const { user, userCourse, userSemester, fetchCourseInfo } = useUser();
 
     const [activeTaken, setActiveTaken] = useState(targetSem?.taken || "");
     const [inputYear, setInputYear] = useState(targetSem?.taken?.split('-')[0] || new Date().getFullYear());
     const [inputTerm, setInputTerm] = useState(targetSem?.taken?.split('-')[1] || (targetSem.termType === 0 ? "1" : "S"));
-    const [localCourses, setLocalCourses] = useState([]);
+    const [localCourses, setLocalCourses] = useState(() => {
+        if (targetSem?.taken) {
+            return userCourse.filter(cs => cs.taken === targetSem.taken);
+        } else {
+            return [];
+        }
+    });
     // handleUpdateRow 락
     const isUpdating = useRef(false);
 
-    // 기존 데이터를 가져오는 기능.
-    useEffect(() => {
-    if (targetSem?.taken) {
-            const filtered = userCourse.filter(cs => cs.taken === targetSem.taken);
-            // 실행 시점을 아주 미세하게 늦춰 렌더링 충돌 방지
-            const timer = setTimeout(() => {
-                setLocalCourses(filtered);
-            }, 0);
-            return () => clearTimeout(timer);
-        }
-    }, []);
-
-    // CourseEntity 부분에서 강의코드 입력방법 변경 가능 (현재는 Enter 입력)
-    const fetchCourseInfo = useCallback(async (cid) => {
-        // 예외 케이스
-        const trimCid = cid.trim();
-        if (!trimCid) { return null; }
-        // 서버 읽기 전에 웹 캐시부터 확인
-        if (courseCache[trimCid]) {
-            return courseCache[trimCid];
-        }
-        // !탐색부
-        try {
-            const courseDocRef = doc(db, "courses", trimCid);
-            const docSnap = await getDoc(courseDocRef);
-
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                const res = { 
-                    cid: docSnap.id,
-                    cname: data.name,
-                    ctype: data.metadata.category,
-                    credit: data.metadata.credits
-                };
-                courseCache[trimCid] = res;
-                return res;
-            } else {
-                console.log("해당 과목 정보가 DB에 존재하지 않습니다.");
-                return null;
-            }
-        } catch (error) {
-            console.error("과목 조회 에러: ", error);
-            return null;
-        }
-    }, []);
+    // Timer 렌더 제거
 
     // const handleUpdateRow: 개별 수강이력 업데이트 처리자 (cid 자동 검색 포함)
     const handleUpdateRow = useCallback(async (index, field, value) => {
@@ -177,10 +143,10 @@ const CoursePopup = ({ targetSem, onClose }) => {
             }
             // !재수강 판단
             const isRetake = userCourse.find(cs => cs.cid === trimCid && cs.taken !== activeTaken);
-            let retakeFl = false;
+            let retakeFlag = false;
             if (isRetake) {
                 if (window.confirm(`[${isRetake.cname}] 수강 기록이 존재합니다. 재수강 등록하시겠습니까?`)) {
-                    retakeFl = true;
+                    retakeFlag = true;
                 } else {
                     // 취소 시 init으로 돌림
                     setLocalCourses(prev => {
@@ -191,16 +157,16 @@ const CoursePopup = ({ targetSem, onClose }) => {
                     return;
                 }
             }
-            // !비동기 처리 (fetchCourseInfo: DB 탐색)
+            // !비동기 처리 (fetchCourseInfo: DB 탐색, UserProvider.jsx에 정의.)
             const found = await fetchCourseInfo(trimCid);
             setLocalCourses(prev => {
                 const next = [...prev];
                 // 자동 검색 부분 (!!isRetake 확인할 것)
                 if (found) {
-                    next[index] = { ...next[index], ...found, retake: retakeFl, fromDB: true };
+                    next[index] = { ...next[index], ...found, retake: retakeFlag, fromDB: true };
                 } else {
                     // 자율 입력 허용. (검색실패)
-                    next[index] = { ...next[index], cid: trimCid, retake: retakeFl, fromDB: false };
+                    next[index] = { ...next[index], cid: trimCid, retake: retakeFlag, fromDB: false };
                 }
                 return next;
             }); 
@@ -298,20 +264,19 @@ const CoursePopup = ({ targetSem, onClose }) => {
 
                 const isRegular = (targetSem.termType === 0);
                 const profileRef = doc(db, "users", uid);
+                // 학사정보(userProfile) 이수학기 수 업데이트
                 batch.update(profileRef, isRegular ? {term: targetSem.term } : { nterm: targetSem.term });
-
             } else if (activeTaken !== targetSem.taken) {
                 const semRef = doc(db, "users", uid, "userSemester", curSemId);
                 batch.update(semRef, { taken: activeTaken, sortKey: sortKey });
             }
 
-            // 기존 과목 삭제
-            const oldCoursesQuery = query(
-                collection(db, "users", uid, "userCourse"), 
-                where("taken", "==", targetSem.taken)
-            );
-            const oldSnap = await getDocs(oldCoursesQuery);
-            oldSnap.forEach(d => batch.delete(d.ref));
+            // 기존 과목 삭제 처리 
+            // !(+ localCourse랑 잘 처리하면, 쓰기 횟수 줄일 수 있을 듯.) 비효율적인 면이 없지 않아 있음.
+            const oldCourses = userCourse.filter(cs => cs.taken === targetSem.taken);
+            oldCourses.forEach(cs => {
+                batch.delete(doc(db, "users", uid, "userCourse", cs.id));
+            });
 
             // 새로운 과목 리스트 추가
             localCourses.forEach(course => {
@@ -370,6 +335,7 @@ const CoursePopup = ({ targetSem, onClose }) => {
                     <div className="table-header">
                         <span className="col-cid">과목코드</span>
                         <span className="col-name">과목명</span>
+                        <span className="col-ctype">과목유형</span>
                         <span className="col-credit">학점</span>
                         <span className="col-grade">성적</span>
                         <span className="col-del"></span>

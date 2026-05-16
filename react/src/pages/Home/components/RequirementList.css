@@ -3,6 +3,8 @@
   margin: 10px auto;
   padding: 20px;
   box-sizing: border-box;
+
+  border: 1px solid var(--border-color);
 }
 
 .reqm-header {
@@ -20,32 +22,33 @@
   width: 100%;
 }
 
-/* 축약 모드 태그 스타일 */
+/* 요건 태그 스타일 */
 .reqm-tag {
   flex: 1;             /* ★ 핵심: 남은 공간을 균등하게 나눠 가짐 (유동적 너비) */
-  min-width: 0;        /* 내용이 길어져도 박스가 터지지 않게 방지 */
+  min-width: 0;
   
   display: flex;
   align-items: center;
-  justify-content: center; /* 텍스트와 아이콘 중앙 정렬 */
+  justify-content: center;
   gap: 8px;
   
   padding: 12px 10px;  /* 상하 패딩을 늘려 크기를 키움 */
   border-radius: 12px;
   font-size: 0.95rem;  /* 글자 크기 약간 키움 */
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--inner-bg);
+
   transition: all 0.2s ease;
 }
 
-.reqm-tag.done { color: #74b9ff; border: 1px solid #74b9ff55; }
-.reqm-tag.pending { color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); }
+.reqm-tag.done { color: var(--color-done); border: 1px solid var(--color-done); }
+.reqm-tag.pending { color: rgba(255, 255, 255, 0.4); border: 1px solid var(--border-color); }
 
 /* 확장 리스트 스타일 */
 .reqm-expanded-list {
   margin-top: 25px;
   padding: 10px;
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--inner-bg);
   border-radius: 12px;
   animation: fadeIn 0.3s ease-out;
 }
@@ -106,7 +109,7 @@
   transition: .4s;
 }
 
-input:checked + .slider { background-color: #74b9ff; }
+input:checked + .slider { background-color: var(--color-done); }
 input:checked + .slider:before { transform: translateX(22px); }
 .slider.round { border-radius: 34px; }
 .slider.round:before { border-radius: 50%; }

@@ -73,6 +73,7 @@
   min-height: 150px;
   margin: 20px auto;
   padding: 20px;
+  border: 1px solid var(--border-color);
 
   box-sizing: border-box;
   justify-content: center;
@@ -185,10 +186,12 @@
 
 /* !이하는 Home 하위의 컴포넌트에 대한 CSS 정의. (또는 더미) */
 /* 공통 섹션 스타일, 통일감 */
-.credit, .requirement, .gpa, .navblk {
+.credit, .requirement, .gpa, .framework {
   display: flex;
-  padding: 20px;
+  padding: 24px;
   box-sizing: border-box;
+
+  border: 1px solid var(--border-color);
 }
 
 /* 이수학점 & GPA, 통일감 */
